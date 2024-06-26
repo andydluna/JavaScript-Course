@@ -464,19 +464,43 @@ GOOD LUCK 😀
 // const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 // console.log(account);
 
-console.log(movements);
+// console.log(movements);
 
-// Equality
-console.log(movements.includes(-130));
-console.log(movements.some(move => move === -130));
-// Some Condition
-console.log(movements.some(move => move > 1300));
-// Every Condition
-console.log(movements.every(move => move > 0));
-console.log(account4.movements.every(move => move > 0));
+// // Equality
+// console.log(movements.includes(-130));
+// console.log(movements.some(move => move === -130));
+// // Some Condition
+// console.log(movements.some(move => move > 1300));
+// // Every Condition
+// console.log(movements.every(move => move > 0));
+// console.log(account4.movements.every(move => move > 0));
 
-// Separate Callback
-const deposit = move => move > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// // Separate Callback
+// const deposit = move => move > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+// const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(account => account.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// // Flat
+// const overallBalance2 = accounts
+//   .map(account => account.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance2);
+// // Flatmap
+// const overallBalance3 = accounts
+//   .flatMap(account => account.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance3);
