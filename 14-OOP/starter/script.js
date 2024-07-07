@@ -461,67 +461,131 @@ GOOD LUCK 😀
 // 4) Private methods
 // (there is also the static version)
 
-class Account {
-  // 1. Public fields (instances)
-  locale = navigator.language;
+// class Account {
+//   // 1. Public fields (instances)
+//   locale = navigator.language;
 
-  // 2. Private fields (instances)
-  #movements = [];
-  #pin;
+//   // 2. Private fields (instances)
+//   #movements = [];
+//   #pin;
 
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.#pin = pin;
 
-    console.log(`Thanks for opening an account, ${owner}`);
+//     console.log(`Thanks for opening an account, ${owner}`);
+//   }
+
+//   // 3. Public methods
+//   // Public interface
+//   getMovements() {
+//     return this.#movements;
+//   }
+
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+
+//   withdraw(val) {
+//     this.deposit(-val);
+
+//     return this;
+//   }
+
+//   requestLoan(val) {
+//     if (this.#approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//     }
+//     return this;
+//   }
+
+//   static helper() {
+//     console.log('Helper');
+//   }
+
+//   // 4. Private methods
+//   #approveLoan(val) {
+//     return true;
+//   }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+// console.log(acc1.getMovements());
+// console.log(acc1);
+
+// Account.helper();
+
+// // Chaining
+// acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// console.log(acc1);
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
 
-  // 3. Public methods
-  // Public interface
-  getMovements() {
-    return this.#movements;
-  }
-
-  deposit(val) {
-    this.#movements.push(val);
+  accelerate() {
+    this.speed += 10;
+    this.printMessage();
     return this;
   }
 
-  withdraw(val) {
-    this.deposit(-val);
-
+  brake() {
+    this.speed -= 5;
+    this.printMessage();
     return this;
   }
 
-  requestLoan(val) {
-    if (this.#approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Loan approved`);
-    }
-    return this;
-  }
-
-  static helper() {
-    console.log('Helper');
-  }
-
-  // 4. Private methods
-  #approveLoan(val) {
-    return true;
+  printMessage() {
+    console.log(`${this.make} going at ${this.speed} km/h`);
   }
 }
 
-const acc1 = new Account('Jonas', 'EUR', 1111);
+class EV extends Car {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
 
-acc1.deposit(250);
-acc1.withdraw(140);
-acc1.requestLoan(1000);
-console.log(acc1.getMovements());
-console.log(acc1);
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
 
-Account.helper();
+  accelerate() {
+    this.speed += 20;
+    this.#charge -= 1;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%`
+    );
+    return this;
+  }
+}
 
-// Chaining
-acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
-console.log(acc1);
+const rivian = new EV('Rivian', 100, 24);
+rivian.accelerate();
+rivian.brake().accelerate().chargeBattery(100).accelerate();
