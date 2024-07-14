@@ -29,6 +29,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
+/*
 const getCountryAndNeighbor = function (country) {
   // AJAX call country 1
   const request = new XMLHttpRequest();
@@ -70,6 +71,14 @@ setTimeout(() => {
     console.log('2 second passed');
     setTimeout(() => {
       console.log('3 second passed');
-    }, 1000);
-  }, 1000);
-}, 1000);
+    }, 1000)
+  }, 1000)
+}, 1000)
+*/
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => renderCountry(data[0]));
+};
+getCountryData('mexico');
