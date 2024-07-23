@@ -153,10 +153,10 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener('click', function (e) {
-  getCountryData('mexico');
+  getCountryData('united states of america');
 });
 
-getCountryData('australia');
+// getCountryData('australia');
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -184,3 +184,33 @@ TEST COORDINATES 2: -33.933, 18.474
 
 GOOD LUCK 😀
 */
+
+const whereAmI = function (lat, lng) {
+  const URL = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`;
+
+  fetch(URL)
+    .then(res => {
+      if (!res.ok) throw new Error('Invalid coordinates!');
+
+      return res.json();
+    })
+    .then(data => {
+      console.log(`You are in ${data.locality}, ${data.countryName}`);
+
+      return fetch(`https://restcountries.com/v3.1/name/${data.countryName}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Country not found!');
+
+      return res.json();
+    })
+    .then(data => renderCountry(data[0]))
+    .catch(err => {
+      console.error(`${err.message} 🥸`);
+    });
+};
+
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
+// whereAmI(-213123123, 0);
