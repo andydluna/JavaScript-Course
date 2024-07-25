@@ -397,7 +397,7 @@ GOOD LUCK 😀
 
 //     return `You are in ${dataGeo.city}, ${dataGeo.countryName}`;
 //   } catch (err) {
-//     console.error(`${err} 💩`);
+//     console.error(`${err.message} 💩`);
 //     renderError(`Something went wrong 💥 ${err.message}`);
 
 //     // Reject promise returned from async function
@@ -510,46 +510,46 @@ TEST DATA: ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']. To test, turn of
 
 GOOD LUCK 😀
 */
-const wait = seconds =>
-  new Promise(resolve => setTimeout(resolve, seconds * 1000));
+// const wait = seconds =>
+//   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 
-const createImage = function (imgPath) {
-  return new Promise((resolve, reject) => {
-    const newImage = document.createElement('img');
-    newImage.src = imgPath;
+// const createImage = function (imgPath) {
+//   return new Promise((resolve, reject) => {
+//     const newImage = document.createElement('img');
+//     newImage.src = imgPath;
 
-    newImage.addEventListener('load', function () {
-      document.querySelector('.images').append(newImage);
-      resolve(newImage);
-    });
+//     newImage.addEventListener('load', function () {
+//       document.querySelector('.images').append(newImage);
+//       resolve(newImage);
+//     });
 
-    newImage.addEventListener('error', function () {
-      reject(new Error('Image not found!'));
-    });
-  });
-};
+//     newImage.addEventListener('error', function () {
+//       reject(new Error('Image not found!'));
+//     });
+//   });
+// };
 
-const loadNPause = async function () {
-  try {
-    let img = await createImage('img/img-1.jpg');
-    await wait(2);
-    img.style.display = 'none';
-    await wait(2);
-    img = await createImage('img/img-2.jpg');
-    await wait(2);
-    img.style.display = 'none';
-  } catch (err) {
-    console.error(`${err.message} 🥸`);
-  }
-};
+// const loadNPause = async function () {
+//   try {
+//     let img = await createImage('img/img-1.jpg');
+//     await wait(2);
+//     img.style.display = 'none';
+//     await wait(2);
+//     img = await createImage('img/img-2.jpg');
+//     await wait(2);
+//     img.style.display = 'none';
+//   } catch (err) {
+//     console.error(`${err.message} 🥸`);
+//   }
+// };
 
-const loadAll = async function (imgArr) {
-  Promise.all(imgArr).then(res =>
-    res.map(async imgPath => {
-      const img = await createImage(imgPath);
-      img.classList.add('parallel');
-    })
-  );
-};
+// const loadAll = async function (imgArr) {
+//   Promise.all(imgArr).then(res =>
+//     res.map(async imgPath => {
+//       const img = await createImage(imgPath);
+//       img.classList.add('parallel');
+//     })
+//   );
+// };
 
-loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
+// loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
